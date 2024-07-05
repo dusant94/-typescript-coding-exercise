@@ -22,10 +22,10 @@ router.post('/auth/login',
 );
 
 // Chat routes (protected by authentication middleware)
-router.use('/', checkAuth); // Apply authentication middleware to all /chat routes
+router.use('/chat', checkAuth); // Apply authentication middleware to all /chat routes
 
-router.get('/messages', getMessages);
+router.get('/chat/messages', getMessages);
 
-router.post('/message/send', sendMessage);
+router.post('/chat/message/send', sendMessage);
 
 module.exports = router;
