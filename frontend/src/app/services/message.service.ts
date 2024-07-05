@@ -11,7 +11,7 @@ export class MessageService {
 
   async all() {
     try {
-      const res = await fetch('http://127.0.0.1:3000/messages');
+      const res = await fetch('http://127.0.0.1:3000/chat/messages');
       const data = await res.json();
       const messages = data.map((message: any) => new Message(message.message, 'delivered', message.user, message.timestamp));
       this.messagesSource.next(messages);

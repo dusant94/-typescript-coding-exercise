@@ -23,7 +23,7 @@ export class CreateMessageComponent {
     this.message.user = 'me';
     this.message.timestamp = currentTime;
     try {
-      const res = await fetch('http://127.0.0.1:3000/message/send', {
+      const res = await fetch('http://127.0.0.1:3000/chat/message/send', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

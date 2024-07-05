@@ -3,7 +3,7 @@ info:
   title: Chat Messenger API
   version: 1.0.0
 paths:
-  /messages:
+  /chat/messages:
     get:
       summary: Get all messages
       responses:
@@ -22,7 +22,7 @@ paths:
                       type: string
                     timestamp:
                       type: string
-  /message/send:
+  /chat/message/send:
     post:
       summary: Send a new message
       requestBody:

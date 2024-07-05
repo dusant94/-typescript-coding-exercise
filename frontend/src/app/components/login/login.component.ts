@@ -17,12 +17,13 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  async onSubmit() {
-    try {
-      await this.authService.login(this.username, this.password);
-      this.router.navigate(['/chat']);
-    } catch (error) {
-      this.error = 'Invalid username or password';
-    }
+  onSubmit() {
+    this.authService.login(this.username, this.password)
+      .subscribe({
+        next: () => console.log('Login successful'),
+        error: (err) => {
+          console.error('Login failed:', err);
+          this.error = err.message;  }
+      });
   }
 }
