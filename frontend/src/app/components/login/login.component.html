@@ -1,0 +1,16 @@
+<div class="login-container">
+  <form (ngSubmit)="onSubmit()">
+    <h2>Login to chat</h2>
+    <div *ngIf="error" class="error">{{ error }}</div>
+    <label>
+      Username
+      <input type="text" [(ngModel)]="username" name="username" required>
+    </label>
+    <label>
+      Password
+      <input type="password" [(ngModel)]="password" name="password" required>
+    </label>
+
+    <button class="pointer bg-blue-400 py-2 px-4 mt-2 w-full" type="submit">Login</button>
+  </form>
+</div>

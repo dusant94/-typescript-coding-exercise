@@ -1,0 +1,9 @@
+<div [ngClass]="{'text-right': message.user === 'me', 'text-left': message.user !== 'me'}" class="p-2">
+  <div [ngClass]="{'bg-blue-100': message.user === 'me', 'bg-gray-100': message.user !== 'me'}"
+       class="inline-block rounded-lg p-2 mb-2">
+    <span class="bg-slate-400 block bg-slate-200 text-slate-500">#{{ message.timestamp }} - {{ message.status }}</span>
+    <div class="p-2" [ngClass]="{'text-slate-500': message.status === 'draft'}">
+      {{ message.text }}
+    </div>
+  </div>
+</div>
