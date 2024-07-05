@@ -1,5 +1,10 @@
-<div>
-  <div *ngFor="let message of messages; index as i;">
-    <app-message [message]="message" [no]="i"></app-message>
+
+<div class="max-w-md mx-auto">
+  <h1 class="text-2xl my-8">{{ title }}</h1>
+  <div>
+    <div *ngFor="let message of messages; index as i;">
+      <app-message [message]="message" [no]="i"></app-message>
+    </div>
   </div>
+  <app-create-message [messageService]="messageService"></app-create-message>
 </div>
