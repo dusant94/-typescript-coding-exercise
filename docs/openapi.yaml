@@ -22,6 +22,8 @@ paths:
                       type: string
                     timestamp:
                       type: string
+        '401':
+          description: Unauthorized, invalid or missing token
   /chat/message/send:
     post:
       summary: Send a new message
@@ -41,3 +43,36 @@ paths:
           description: Message sent successfully
         '400':
           description: Bad request, invalid input
+        '401':
+          description: Unauthorized, invalid or missing token
+  /auth/login:
+    post:
+      summary: Log in a user and get a JWT token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+              required:
+                - username
+                - password
+      responses:
+        '200':
+          description: User logged in successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        '400':
+          description: Bad request, invalid input
+        '401':
+          description: Unauthorized, invalid username or password

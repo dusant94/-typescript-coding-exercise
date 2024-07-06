@@ -14,11 +14,8 @@ router.post('/auth/login',
   login
 );
 
-// Chat routes (protected by authentication middleware)
-router.use('/chat', checkAuth); // Apply authentication middleware to all /chat routes
-
-router.get('/chat/messages', getMessages);
-
-router.post('/chat/message/send', sendMessage);
+ 
+router.get('/chat/messages',checkAuth, getMessages);
+router.post('/chat/message/send',checkAuth, sendMessage);
 
 module.exports = router;
