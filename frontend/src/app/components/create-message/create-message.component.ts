@@ -41,25 +41,36 @@ export class CreateMessageComponent {
     this.message.status = 'pending';
     this.message.user = this.currentUser;
     this.message.timestamp = currentTime;
+    let botMessage = new Message('', 'delivered', 'chatbot', currentTime );
 
     try {
-      await this.apiService.post('chat/message/send', {
+      // Make HTTP POST request to send the message
+      const response: any = await this.apiService.post('chat/message/send', {
         message: this.message.text,
         user: this.message.user,
       }).toPromise();
+
+      // Check if the response status is 200
+      if (response && response.message) {
+        // Display the additional message from the response
+        botMessage.text = response.message
+      }
+
       // Send the message via WebSocket
       this.webSocketService.sendMessage({
         text: this.message.text,
         user: this.message.user,
         timestamp: this.message.timestamp,
       });
-
       this.message.status = 'delivered';
     } catch (error) {
       this.message.status = 'failed';
     }
 
     this.messageService.add(this.message);
+    if(botMessage.text){
+      this.messageService.add(botMessage);
+    }
     this.message = new Message('', 'draft');
   }
 }

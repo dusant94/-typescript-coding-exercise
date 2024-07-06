@@ -34,17 +34,9 @@ exports.sendMessage = async (req, res) => {
 
     // Check for response in the context
     if (context.response) {
-      return res.status(200).send(context.response); 
+      return res.status(200).send({ 'message': context.response}); 
     }
-    const wss = req.app.get('wss');  // Access the WebSocket server instance
-    if (wss) {
-      const messageToSend = JSON.stringify(newMessage);
-      wss.clients.forEach(client => {
-        if (client.readyState === WebSocket.OPEN) {
-          client.send(messageToSend);
-        }
-      });
-    }
+  
     res.status(204).send('Message sent successfully'); // Default response
   } catch (error) {
     res.status(500).send('Internal Server Error'); // Handle plugin errors
