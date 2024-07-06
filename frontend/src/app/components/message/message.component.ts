@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NgClass } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import { Message } from '../../models/message.model';
 import { AuthService } from '../../services/auth.service';
 
@@ -7,7 +7,7 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-message',
   standalone: true,
   templateUrl: './message.component.html',
-  imports: [NgClass]
+  imports: [NgClass, NgIf]
 })
 export class MessageComponent {
   @Input({ required: true }) message!: Message;

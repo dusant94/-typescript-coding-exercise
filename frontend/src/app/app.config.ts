@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { AuthService } from './services/auth.service';
 import { MessageService } from './services/message.service';
 import { ApiService } from './services/api.service';
+import { WebSocketService } from './services/websocket.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,6 +14,6 @@ export const appConfig: ApplicationConfig = {
     MessageService,
     provideHttpClient(),
     ApiService,
-
+    WebSocketService
   ]
 };

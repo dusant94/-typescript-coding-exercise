@@ -6,11 +6,15 @@ const { validationResult } = require('express-validator');
 const JWT_SECRET = 'your-secret-key'; // Change this to a secure, random string
 
 // Mock user database
-// This should be replaced with a real database in production
+// This should be replaced with a real database
 const users = [
   {
     username: 'dusant',
-    password: '1123456' 
+    password: '123456' 
+  },
+  {
+    username: 'user2',
+    password: '123456' 
   }
 ];
 

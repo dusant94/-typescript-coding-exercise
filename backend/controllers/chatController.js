@@ -1,4 +1,7 @@
 const pluginManager = require('../pluginManagerInstance');   
+
+// Mock messages table database
+// This should be replaced with a real database connection
 const messages = [];
 
 // Get all messages
@@ -33,7 +36,15 @@ exports.sendMessage = async (req, res) => {
     if (context.response) {
       return res.status(200).send(context.response); 
     }
-
+    const wss = req.app.get('wss');  // Access the WebSocket server instance
+    if (wss) {
+      const messageToSend = JSON.stringify(newMessage);
+      wss.clients.forEach(client => {
+        if (client.readyState === WebSocket.OPEN) {
+          client.send(messageToSend);
+        }
+      });
+    }
     res.status(204).send('Message sent successfully'); // Default response
   } catch (error) {
     res.status(500).send('Internal Server Error'); // Handle plugin errors
