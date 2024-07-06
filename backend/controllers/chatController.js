@@ -36,7 +36,6 @@ exports.sendMessage = async (req, res) => {
 
     res.status(204).send('Message sent successfully'); // Default response
   } catch (error) {
-    console.error('Error handling message:', error);
     res.status(500).send('Internal Server Error'); // Handle plugin errors
   }
 };

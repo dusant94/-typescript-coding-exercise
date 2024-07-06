@@ -14,7 +14,7 @@ exports.checkAuth = (req, res, next) => {
     if (err) {
       return res.status(401).json({ message: 'Invalid token' });
     }
-
+    console.log(decoded)
     req.user = decoded;
     next();
   });

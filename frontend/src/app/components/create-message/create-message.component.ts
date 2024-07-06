@@ -6,6 +6,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgIf, NgClass } from '@angular/common';
 import { MessageComponent } from '../message/message.component';
 import { ApiService } from '../../services/api.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-create-message',
@@ -18,13 +19,20 @@ export class CreateMessageComponent {
   message: Message = new Message('', 'draft');
   previewNo: number = -1;
   @Input() messageService!: MessageService;  // Update to ApiService
+  currentUser: string = '';  // To hold the current user's name
 
-  constructor(private apiService: ApiService) {}  // Inject ApiService
+  constructor(
+    private apiService: ApiService,
+    private authService: AuthService  // Inject AuthService
+  ) {
+    // Get the current user from AuthService
+    this.currentUser = this.authService.getCurrentUser();
+  }
 
   async onSubmit() {
     const currentTime = new Date().toISOString();
     this.message.status = 'pending';
-    this.message.user = 'me';
+    this.message.user = this.currentUser;
     this.message.timestamp = currentTime;
 
     try {
@@ -32,9 +40,8 @@ export class CreateMessageComponent {
         message: this.message.text,
         user: this.message.user,
       }).toPromise();
-      this.message.status = 'sent';
+      this.message.status = 'delivered';
     } catch (error) {
-      console.error('Error sending message:', error);
       this.message.status = 'failed';
     }
 

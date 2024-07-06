@@ -22,8 +22,7 @@ export class LoginComponent {
       .subscribe({
         next: () => console.log('Login successful'),
         error: (err) => {
-          console.error('Login failed:', err);
-          this.error = err.message;  }
+          this.error = err;  }
       });
   }
 }
