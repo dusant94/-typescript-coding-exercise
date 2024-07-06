@@ -4,14 +4,15 @@ import { provideHttpClient } from '@angular/common/http';
 import { routes } from './app.routes';
 import { AuthService } from './services/auth.service';
 import { MessageService } from './services/message.service';
-import { AuthGuard } from './guards/auth.guard';
+import { ApiService } from './services/api.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     AuthService,
-    AuthGuard,
     MessageService,
-    provideHttpClient()
+    provideHttpClient(),
+    ApiService,
+
   ]
 };

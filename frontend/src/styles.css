@@ -80,3 +80,19 @@ button:hover {
   color: #dc2626; /* Red color for error message */
   margin-bottom: 15px;
 }
+nav {
+  background-color: #3b82f6; /* Tailwind blue-500 */
+  color: white;
+  padding: 1rem;
+}
+
+nav a {
+  font-size: 1.25rem; /* Tailwind text-xl */
+  font-weight: bold;
+}
+
+button {
+  background-color: #ef4444; /* Tailwind red-500 */
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem; /* Tailwind rounded */
+}

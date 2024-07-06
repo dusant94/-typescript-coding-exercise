@@ -5,12 +5,14 @@ import { MessageComponent } from '../message/message.component';
 import { Message } from '../../models/message.model';
 import { Subscription } from 'rxjs';
 import { CreateMessageComponent } from '../create-message/create-message.component';
+import { NavigationComponent } from '../navigation/navigation.component';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-chat',
   standalone: true,
-  providers: [MessageService],
-  imports: [NgForOf, MessageComponent, CreateMessageComponent],
+  providers: [MessageService, ApiService],
+  imports: [NgForOf, MessageComponent, CreateMessageComponent, NavigationComponent],
   templateUrl: './chat.component.html'
 })
 export class ChatComponent implements OnInit {

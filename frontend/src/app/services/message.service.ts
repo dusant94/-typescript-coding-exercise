@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Message } from  '../models/message.model';
+import { ApiService } from './api.service';
+import { Message } from '../models/message.model';
 
 @Injectable({
-  providedIn: 'root'  // Ensure MessageService is provided in the root injector
+  providedIn: 'root'
 })
 export class MessageService {
   private messagesSource = new BehaviorSubject<Message[]>([]);
   messages$ = this.messagesSource.asObservable();
 
-  async all() {
-    try {
-      const res = await fetch('http://127.0.0.1:3000/chat/messages');
-      const data = await res.json();
-      const messages = data.map((message: any) => new Message(message.message, 'delivered', message.user, message.timestamp));
-      this.messagesSource.next(messages);
-    } catch (error) {
-      console.error('Error fetching messages:', error);
-    }
+  constructor(private apiService: ApiService) {}
+
+  all() {
+    this.apiService.get<any[]>('chat/messages')
+      .subscribe(data => {
+        const messages = data.map((message) => new Message(message.message, 'delivered', message.user, message.timestamp));
+        this.messagesSource.next(messages);
+      });
   }
 
   add(message: Message) {
