@@ -1,3 +1,5 @@
+const pluginManager = require('../pluginManagerInstance');   
+const messages = [];
 
 // Get all messages
 exports.getMessages = (req, res) => {
@@ -23,12 +25,13 @@ exports.sendMessage = async (req, res) => {
   const context = { newMessage };
 
   try {
+    
     // Pass the message to plugins
     await pluginManager.handleMessage(newMessage, context);
 
     // Check for response in the context
     if (context.response) {
-      return res.status(200).send(context.response); // Send plugin response
+      return res.status(200).send(context.response); 
     }
 
     res.status(204).send('Message sent successfully'); // Default response

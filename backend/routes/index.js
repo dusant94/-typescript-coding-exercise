@@ -6,13 +6,6 @@ const { checkAuth } = require('../middlewares/authMiddleware');
 
 const router = express.Router();
 
-// Authentication routes
-router.post('/auth/register',
-  // Validate input
-  body('username').isLength({ min: 3 }).withMessage('Username must be at least 3 characters'),
-  body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
-  register
-);
 
 router.post('/auth/login',
   // Validate input
